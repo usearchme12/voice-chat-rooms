@@ -16,14 +16,29 @@
     padding: 0;
 }
 
-body {
+#voice-chat-widget-container {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
-    height: 100vh;
+    width: 100%;
+    max-width: 600px;
+    height: 750px;
+    margin: 20px auto;
+    position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+body {
+    background-color: #0c0c0c;
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 h1, .logo {
@@ -37,7 +52,7 @@ h1, .logo {
 
 /* Overlay Styles */
 .overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
