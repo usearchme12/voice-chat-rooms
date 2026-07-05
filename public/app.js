@@ -117,8 +117,20 @@ const toggleRecording = async () => {
                     // Wait a tiny 250ms safety cushion to let power-on line click stabilize
                     setTimeout(() => {
                         if (isRecording) {
+                            let mimeType = 'audio/webm';
+                            let options = {};
+                            if (typeof MediaRecorder.isTypeSupported === 'function') {
+                                if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+                                    options = { mimeType: 'audio/webm;codecs=opus' };
+                                    mimeType = 'audio/webm';
+                                } else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+                                    options = { mimeType: 'audio/mp4' };
+                                    mimeType = 'audio/mp4';
+                                }
+                            }
+
                             audioChunks = [];
-                            mediaRecorder = new MediaRecorder(currentStream);
+                            mediaRecorder = new MediaRecorder(currentStream, options);
 
                             mediaRecorder.ondataavailable = (e) => {
                                 if (e.data.size > 0) audioChunks.push(e.data);
@@ -145,18 +157,18 @@ const toggleRecording = async () => {
                             };
 
                             mediaRecorder.onstop = () => {
-                                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                                const audioBlob = new Blob(audioChunks, { type: mimeType });
                                 const msgId = `msg-${Date.now()}`;
 
                                 // Save for replay
-                                messageStore.set(msgId, { blob: audioBlob, mimeType: 'audio/webm', userId: 'Me' });
+                                messageStore.set(msgId, { blob: audioBlob, mimeType, userId: 'Me' });
 
                                 // Add to UI
                                 createVoiceBubble({ userId: 'Me', msgId }, true);
 
                                 socket.emit('audio-chunk', {
                                     blob: audioBlob,
-                                    mimeType: 'audio/webm',
+                                    mimeType,
                                     msgId
                                 });
                             };
