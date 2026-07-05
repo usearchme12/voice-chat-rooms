@@ -26,6 +26,12 @@ joinBtn.addEventListener('click', async () => {
         socket.emit('register-callsign', callsign);
 
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Wake up and unlock the AudioContext inside this user click gesture to allow autoplay
+        if (audioContext.state === 'suspended') {
+            await audioContext.resume();
+        }
+
         setupVisualizer();
         joinOverlay.classList.add('hidden');
         app.classList.remove('hidden');
