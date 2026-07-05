@@ -1,4 +1,5 @@
-const socket = io();
+// Connect to Socket.io (Replace with your actual Render app URL once created)
+const socket = io(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '' : 'https://voice-chat-rooms-fwf0.onrender.com');
 const joinOverlay = document.getElementById('join-overlay');
 const joinBtn = document.getElementById('join-btn');
 const app = document.getElementById('app');
