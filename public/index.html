@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOICE ROOM | Cyber-Noir Audio Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="join-overlay" class="overlay">
+        <div class="overlay-content">
+            <h1 class="glitch" data-text="VOICE ROOM">VOICE ROOM</h1>
+            <p>Enter the frequency. Audio only. Moving only.</p>
+            <input type="text" id="callsign-input" placeholder="ENTER CALLSIGN (E.G. VIPER)" maxlength="12" style="display: block; width: 100%; padding: 12px; margin: 20px auto; background: #111; border: 1px solid var(--primary-neon); color: var(--primary-neon); font-family: 'Orbitron', sans-serif; text-align: center; font-size: 1rem; border-radius: 4px; outline: none; box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);">
+            <button id="join-btn">ENTER ROOM</button>
+        </div>
+    </div>
+
+    <main id="app" class="hidden">
+        <header>
+            <div class="logo">VOICE<span class="neon-text">ROOM</span></div>
+            <div class="status">
+                <span id="connection-status" class="status-dot"></span>
+                <span id="room-info">SCANNING FREQUENCY...</span>
+            </div>
+        </header>
+
+        <div id="transmission-bar" class="transmission-bar hidden">
+            <span class="pulse-warning">●</span>
+            <span id="transmission-text">VIPER IS TRANSMITTING...</span>
+        </div>
+
+        <section id="chat-stream">
+            <!-- Messages will appear here vertically -->
+        </section>
+
+        <div class="visualizer-overlay">
+            <canvas id="visualizer"></canvas>
+        </div>
+
+        <footer class="controls">
+            <div class="mic-container">
+                <button id="record-btn" class="mic-btn">
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path fill="currentColor" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
