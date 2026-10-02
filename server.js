@@ -18,6 +18,7 @@ app.use(express.static('public'));
 let onlineUsers = 0;
 const MAX_USERS = 20;
 const users = new Map(); // socket.id -> callsign
+const activeSpeakers = new Set(); // tracks unique senders
 
 io.on('connection', (socket) => {
   if (onlineUsers >= MAX_USERS) {
@@ -29,6 +30,7 @@ io.on('connection', (socket) => {
   onlineUsers++;
   console.log('a user connected:', socket.id, 'Total:', onlineUsers);
   io.emit('user-count', onlineUsers);
+  socket.emit('speakers-count', activeSpeakers.size);
 
   // Register callsings (nicknames)
   socket.on('register-callsign', (callsign) => {
@@ -37,8 +39,12 @@ io.on('connection', (socket) => {
 
   // When a user sends an audio chunk
   socket.on('audio-chunk', (data) => {
+    const sender = users.get(socket.id) || 'ANONYMOUS';
+    activeSpeakers.add(sender);
+    io.emit('speakers-count', activeSpeakers.size);
+
     socket.broadcast.emit('audio-stream', {
-      userId: users.get(socket.id) || 'ANONYMOUS',
+      userId: sender,
       blob: data.blob,
       mimeType: data.mimeType,
       msgId: data.msgId
