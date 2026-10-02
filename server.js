@@ -56,6 +56,13 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('transmitting-stop');
   });
 
+  // Handle deleting a sent message from the room
+  socket.on('delete-msg', (data) => {
+    if (data && data.msgId) {
+      io.emit('delete-msg', { msgId: data.msgId });
+    }
+  });
+
   socket.on('disconnect', () => {
     onlineUsers--;
     console.log('user disconnected:', socket.id, 'Total:', onlineUsers);
