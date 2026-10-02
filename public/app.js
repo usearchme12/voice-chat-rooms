@@ -280,6 +280,19 @@ socket.on('audio-stream', (data) => {
     }
 });
 
+// Handle past messages when joining room
+socket.on('message-history', (history) => {
+    if (!Array.isArray(history) || history.length === 0) return;
+    const callsignInput = document.getElementById('callsign-input');
+    const myCallsign = callsignInput ? callsignInput.value.trim().toUpperCase() : '';
+    history.forEach(data => {
+        if (messageStore.has(data.msgId)) return;
+        const blob = data.blob instanceof Blob ? data.blob : new Blob([data.blob], { type: data.mimeType });
+        messageStore.set(data.msgId, { ...data, blob });
+        createVoiceBubble(data, data.userId === myCallsign);
+    });
+});
+
 async function playNextInQueue() {
     if (audioQueue.length === 0) {
         isPlaying = false;
