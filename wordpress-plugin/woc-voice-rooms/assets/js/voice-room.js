@@ -481,6 +481,7 @@
                                             try {
                                                 const fd = new FormData();
                                                 fd.append('action', 'woc_save_voice_note');
+                                                if (config.nonce) fd.append('nonce', config.nonce);
                                                 fd.append('audio', audioBlob, `${msgId}.${mimeType.includes('mp4') ? 'mp4' : 'webm'}`);
                                                 fd.append('msg_id', msgId);
                                                 fd.append('user_id', myCallsign);
@@ -712,6 +713,7 @@
                 try {
                     const fd = new FormData();
                     fd.append('action', 'woc_delete_voice_note');
+                    if (config.nonce) fd.append('nonce', config.nonce);
                     fd.append('msg_id', msgId);
                     fetch(config.ajaxUrl, { method: 'POST', body: fd }).catch(() => {});
                 } catch(e) {}

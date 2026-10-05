@@ -75,10 +75,13 @@ class WOC_Voice_History {
     }
 
     public function ajax_get_notes() {
+        check_ajax_referer('woc_vr_voice_nonce', 'nonce', false);
         wp_send_json_success($this->get_recent_notes());
     }
 
     public function ajax_save_note() {
+        check_ajax_referer('woc_vr_voice_nonce', 'nonce');
+
         if (empty($_FILES['audio']) || empty($_POST['msg_id'])) {
             wp_send_json_error('Missing audio or msg_id');
         }
@@ -153,6 +156,8 @@ class WOC_Voice_History {
     }
 
     public function ajax_delete_note() {
+        check_ajax_referer('woc_vr_voice_nonce', 'nonce');
+
         $msg_id = preg_replace('/[^a-zA-Z0-9_\-]/', '', sanitize_text_field($_POST['msg_id'] ?? ''));
         if (!$msg_id) {
             wp_send_json_error('Missing msg_id');

@@ -21,18 +21,8 @@ class WOC_Voice_Rooms_Admin {
 
     public function add_settings_page() {
         add_options_page(
-            __('Voice Rooms Settings', 'woc-voice-chat'),
-            __('Voice Rooms', 'woc-voice-chat'),
-            'manage_options',
-            'woc-voice-chat',
-            array($this, 'render_settings_page')
-        );
-
-        // Also alias woc-voice-rooms so both URL slugs work
-        add_submenu_page(
-            null,
-            __('Voice Rooms Settings', 'woc-voice-chat'),
-            __('Voice Rooms', 'woc-voice-chat'),
+            __('Voice Rooms Settings', 'woc-voice-rooms'),
+            __('Voice Rooms', 'woc-voice-rooms'),
             'manage_options',
             'woc-voice-rooms',
             array($this, 'render_settings_page')

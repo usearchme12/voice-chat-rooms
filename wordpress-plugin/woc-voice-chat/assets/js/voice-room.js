@@ -136,6 +136,10 @@
                     }
                     if (statusText) statusText.textContent = 'FREQUENCY ONLINE';
                     console.log('[WOC Voice] Connected to server:', config.serverUrl);
+                    const activeCallsign = (callsignInput ? callsignInput.value.trim().toUpperCase() : '') || safeStorage.get('woc_vr_callsign');
+                    if (activeCallsign) {
+                        try { socket.emit('register-callsign', activeCallsign); } catch(e){}
+                    }
                 });
 
                 socket.on('disconnect', () => {
@@ -477,6 +481,7 @@
                                             try {
                                                 const fd = new FormData();
                                                 fd.append('action', 'woc_save_voice_note');
+                                                if (config.nonce) fd.append('nonce', config.nonce);
                                                 fd.append('audio', audioBlob, `${msgId}.${mimeType.includes('mp4') ? 'mp4' : 'webm'}`);
                                                 fd.append('msg_id', msgId);
                                                 fd.append('user_id', myCallsign);
@@ -708,6 +713,7 @@
                 try {
                     const fd = new FormData();
                     fd.append('action', 'woc_delete_voice_note');
+                    if (config.nonce) fd.append('nonce', config.nonce);
                     fd.append('msg_id', msgId);
                     fetch(config.ajaxUrl, { method: 'POST', body: fd }).catch(() => {});
                 } catch(e) {}

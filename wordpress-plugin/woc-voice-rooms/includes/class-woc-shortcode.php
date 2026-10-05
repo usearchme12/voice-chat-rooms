@@ -73,6 +73,7 @@ class WOC_Voice_Rooms_Shortcode {
                 'displayName' => esc_html($user_display_name),
             ),
             'ajaxUrl'        => admin_url('admin-ajax.php'),
+            'nonce'          => wp_create_nonce('woc_vr_voice_nonce'),
             'initialHistory' => class_exists('WOC_Voice_History') ? WOC_Voice_History::get_instance()->get_recent_notes() : array(),
             'i18n'         => array(
                 'connecting'       => __('SCANNING FREQUENCY...', 'woc-voice-rooms'),

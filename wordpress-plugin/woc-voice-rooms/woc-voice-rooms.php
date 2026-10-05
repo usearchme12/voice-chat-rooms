@@ -123,7 +123,7 @@ class WOC_Voice_Rooms_Plugin {
     }
 
     public function add_action_links($links) {
-        $settings_link = '<a href="' . admin_url('options-general.php?page=woc-voice-chat') . '">' . __('Settings', 'woc-voice-chat') . '</a>';
+        $settings_link = '<a href="' . admin_url('options-general.php?page=woc-voice-rooms') . '">' . __('Settings', 'woc-voice-rooms') . '</a>';
         array_unshift($links, $settings_link);
         return $links;
     }
