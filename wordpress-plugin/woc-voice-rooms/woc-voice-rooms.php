@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: World of Chat - Voice Rooms (Free Edition)
+ * Plugin Name: World of Chat - Voice Rooms
  * Plugin URI: https://www.worldofchat.co.uk/
- * Description: Low-latency, push-to-talk anonymous voice chat rooms pre-configured with the free cloud signaling server.
+ * Description: Low-latency, push-to-talk anonymous voice chat rooms with dynamic mic warmup, waveform audio bubbles, and multi-theme support.
  * Version: 1.4.8
  * Author: World of Chat
  * Author URI: https://www.worldofchat.co.uk/
