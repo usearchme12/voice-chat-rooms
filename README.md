@@ -37,6 +37,37 @@ To solve the limitations of web browser audio capture (specifically hardware sta
 
 ---
 
+## Infrastructure: Migration to Dedicated VPS (`voice.worldofchat.co.uk`)
+
+### Why We Moved from Render (`onrender.com`) to the Dedicated VPS
+Previously, the Node.js / Socket.io signaling server was hosted on Render (`https://voice-chat-rooms-fwf0.onrender.com`). We permanently migrated production to a dedicated Linux VPS at `https://voice.worldofchat.co.uk` (IP: `212.227.57.3`) for several critical architectural reasons:
+
+1. **Elimination of Cold Starts & Spin-Down Latency**:
+   - Render's free/hobby instances automatically spin down to 0 after 15 minutes of inactivity. When a visitor opened the voice room, the server required 30 to 60 seconds to spin up, causing connection timeouts and a broken user experience.
+   - The dedicated VPS runs persistently 24/7 with PM2 / Systemd service supervisors, guaranteeing instant (<100ms) WebSocket handshakes at all times.
+2. **Dedicated System Memory & Audio Buffering**:
+   - Multi-user voice chunks (up to 10MB per stream) require stable memory buffers. The VPS eliminates memory capping and aggressive process kills.
+3. **Direct Domain & SSL Integration**:
+   - Running directly on `https://voice.worldofchat.co.uk` unifies branding, eliminates third-party host dependency, and resolves strict browser cross-origin audio / CORS policies.
+
+---
+
+## WordPress Integration (`woc-voice-chat` & `woc-voice-rooms`)
+
+The repository includes the production WordPress plugin located in `wordpress-plugin/`:
+- **Default Server**: Points to `https://voice.worldofchat.co.uk`.
+- **Status Indicator**: Displays real-time online presence as `X ONLINE` (replacing the generic `SIGNAL` label).
+- **Persistent Message Storage**:
+  - Automatically records up to 25 historical voice messages on disk and in WordPress options (`woc_vr_recent_history`).
+  - Audio notes older than 7 days are auto-pruned to protect disk storage while ensuring the room never resets to blank overnight.
+- **Accurate Timestamping**:
+  - Dynamically displays `Today, HH:MM`, `Yesterday, HH:MM`, or `D Mon, HH:MM`.
+  - Automatically falls back to file modification time (`filemtime`) on disk for legacy audio files to avoid inaccurate viewer page-load clocks.
+- **Microphone Hardware Stabilization**:
+  - Dynamically waits for mic hardware signal detection before recording chunks, preventing clipped or blank audio files.
+
+---
+
 ## Installation & Local Run
 
 ### Prerequisites

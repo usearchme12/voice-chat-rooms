@@ -1,0 +1,705 @@
+/* ==========================================================================
+   World of Chat - Voice Rooms (Front-End Scoped Styles)
+   ========================================================================== */
+
+/* Theme Variables */
+.woc-voice-widget {
+    /* Base Reset & Layout */
+    all: initial;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 16px;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.woc-voice-widget * {
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+/* ==========================================================================
+   THEME 1: Cyber-Noir (Default Neon Glow)
+   ========================================================================== */
+.woc-voice-widget.theme-cyber-noir {
+    --woc-bg: #070709;
+    --woc-card-bg: rgba(14, 14, 20, 0.95);
+    --woc-primary: #00f2ff;
+    --woc-secondary: #8b5cf6;
+    --woc-accent: #ff0055;
+    --woc-text: #f1f5f9;
+    --woc-text-muted: #94a3b8;
+    --woc-border: rgba(0, 242, 255, 0.2);
+    --woc-bubble-sent: #1e1e2d;
+    --woc-bubble-received: #12121c;
+    --woc-font-heading: 'Orbitron', monospace;
+    --woc-glow: 0 0 25px rgba(0, 242, 255, 0.35);
+    --woc-ring-bg: rgba(255, 255, 255, 0.1);
+    background-color: var(--woc-bg);
+    border: 1px solid var(--woc-border);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 242, 255, 0.05);
+}
+
+/* ==========================================================================
+   THEME 2: Clean Dark (Modern Slate & Indigo)
+   ========================================================================== */
+.woc-voice-widget.theme-clean-dark {
+    --woc-bg: #0f172a;
+    --woc-card-bg: #1e293b;
+    --woc-primary: #6366f1;
+    --woc-secondary: #06b6d4;
+    --woc-accent: #ef4444;
+    --woc-text: #f8fafc;
+    --woc-text-muted: #94a3b8;
+    --woc-border: rgba(255, 255, 255, 0.1);
+    --woc-bubble-sent: #312e81;
+    --woc-bubble-received: #1e293b;
+    --woc-font-heading: 'Inter', sans-serif;
+    --woc-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+    --woc-ring-bg: rgba(255, 255, 255, 0.1);
+    background-color: var(--woc-bg);
+    border: 1px solid var(--woc-border);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   THEME 3: Clean Light (Crisp White & Blue)
+   ========================================================================== */
+.woc-voice-widget.theme-clean-light {
+    --woc-bg: #ffffff;
+    --woc-card-bg: #f8fafc;
+    --woc-primary: #2563eb;
+    --woc-secondary: #7c3aed;
+    --woc-accent: #dc2626;
+    --woc-text: #0f172a;
+    --woc-text-muted: #64748b;
+    --woc-border: #e2e8f0;
+    --woc-bubble-sent: #dbeafe;
+    --woc-bubble-received: #f1f5f9;
+    --woc-font-heading: 'Inter', sans-serif;
+    --woc-glow: 0 4px 15px rgba(37, 99, 235, 0.2);
+    --woc-ring-bg: #e2e8f0;
+    background-color: var(--woc-bg);
+    border: 1px solid var(--woc-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.woc-voice-widget .woc-hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Overlay: Join Room Card
+   ========================================================================== */
+.woc-voice-widget .woc-join-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: radial-gradient(circle at center, var(--woc-card-bg) 0%, var(--woc-bg) 100%);
+    backdrop-filter: blur(8px);
+}
+
+.woc-voice-widget .woc-overlay-card {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.woc-voice-widget .woc-badge-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--woc-primary);
+    background: rgba(0, 242, 255, 0.1);
+    border: 1px solid var(--woc-border);
+    margin-bottom: 16px;
+}
+
+.woc-voice-widget .woc-glitch-title {
+    font-family: var(--woc-font-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--woc-text);
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+}
+
+.woc-voice-widget .woc-overlay-desc {
+    color: var(--woc-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+}
+
+.woc-voice-widget .woc-callsign-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.woc-voice-widget .woc-callsign-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--woc-card-bg);
+    border: 1.5px solid var(--woc-border);
+    border-radius: 8px;
+    color: var(--woc-text);
+    font-family: var(--woc-font-heading);
+    font-size: 1.05rem;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.woc-voice-widget .woc-callsign-input:focus {
+    border-color: var(--woc-primary);
+    box-shadow: var(--woc-glow);
+}
+
+.woc-voice-widget .woc-wp-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--woc-primary);
+    font-weight: 500;
+}
+
+.woc-voice-widget .woc-enter-btn {
+    width: 100%;
+    padding: 15px 30px;
+    background: var(--woc-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--woc-font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    box-shadow: var(--woc-glow);
+    transition: transform 0.2s ease, filter 0.2s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.woc-voice-widget.theme-cyber-noir .woc-enter-btn {
+    color: #070709;
+}
+
+.woc-voice-widget .woc-enter-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* ==========================================================================
+   App Body & Layout
+   ========================================================================== */
+.woc-voice-widget .woc-app-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header */
+.woc-voice-widget .woc-widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--woc-card-bg);
+    border-bottom: 1px solid var(--woc-border);
+    z-index: 10;
+}
+
+.woc-voice-widget .woc-logo {
+    font-family: var(--woc-font-heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 1.5px;
+    color: var(--woc-text);
+}
+
+.woc-voice-widget .woc-logo-accent {
+    color: var(--woc-primary);
+    margin-left: 2px;
+}
+
+.woc-voice-widget .woc-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--woc-text-muted);
+}
+
+.woc-voice-widget .woc-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #64748b;
+    display: inline-block;
+}
+
+.woc-voice-widget .woc-status-dot.woc-status-connected {
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.woc-voice-widget .woc-status-dot.woc-status-connecting {
+    background-color: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b;
+    animation: woc-pulse 1.2s infinite;
+}
+
+.woc-voice-widget .woc-status-dot.woc-status-offline {
+    background-color: #ef4444;
+}
+
+.woc-voice-widget .woc-user-count {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    background: rgba(0, 242, 255, 0.1);
+    color: var(--woc-primary);
+    border: 1px solid var(--woc-border);
+}
+
+.woc-voice-widget .woc-speakers-count {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--woc-secondary, #8b5cf6);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    letter-spacing: 0.5px;
+}
+
+/* Waking Up Cloud Server Notice */
+.woc-voice-widget .woc-server-waking-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: rgba(245, 158, 11, 0.15);
+    border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+    font-size: 0.82rem;
+    font-weight: 500;
+    z-index: 10;
+}
+
+.woc-voice-widget .woc-pulse-icon {
+    animation: woc-pulse 1s infinite alternate;
+}
+
+/* Transmission HUD */
+.woc-voice-widget .woc-transmission-hud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(255, 0, 85, 0.15);
+    border-bottom: 1px solid rgba(255, 0, 85, 0.4);
+    color: var(--woc-accent);
+    font-family: var(--woc-font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+.woc-voice-widget .woc-hud-pulse {
+    animation: woc-blink 0.8s infinite;
+}
+
+/* Chat Stream */
+.woc-voice-widget .woc-chat-stream {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 5;
+    scroll-behavior: smooth;
+}
+
+.woc-voice-widget .woc-chat-stream::-webkit-scrollbar {
+    width: 6px;
+}
+
+.woc-voice-widget .woc-chat-stream::-webkit-scrollbar-thumb {
+    background: var(--woc-border);
+    border-radius: 4px;
+}
+
+.woc-voice-widget .woc-stream-empty {
+    margin: auto;
+    text-align: center;
+    color: var(--woc-text-muted);
+    font-size: 0.9rem;
+    padding: 20px;
+}
+
+/* Message Bubble */
+.woc-voice-widget .woc-msg-wrap {
+    display: flex;
+    width: 100%;
+}
+
+.woc-voice-widget .woc-msg-wrap.sent {
+    justify-content: flex-end;
+}
+
+.woc-voice-widget .woc-msg-wrap.received {
+    justify-content: flex-start;
+}
+
+.woc-voice-widget .woc-voice-bubble {
+    width: 100%;
+    max-width: 380px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--woc-border);
+}
+
+.woc-voice-widget .woc-msg-wrap.sent .woc-voice-bubble {
+    background-color: var(--woc-bubble-sent);
+    border-bottom-right-radius: 2px;
+}
+
+.woc-voice-widget .woc-msg-wrap.received .woc-voice-bubble {
+    background-color: var(--woc-bubble-received);
+    border-bottom-left-radius: 2px;
+}
+
+.woc-voice-widget .woc-voice-bubble:hover {
+    transform: translateY(-2px);
+    border-color: var(--woc-primary);
+}
+
+.woc-voice-widget .woc-voice-bubble.playing {
+    border-color: var(--woc-primary);
+    box-shadow: var(--woc-glow);
+}
+
+.woc-voice-widget .woc-bubble-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--woc-text-muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.woc-voice-widget .woc-bubble-sender {
+    color: var(--woc-primary);
+    font-family: var(--woc-font-heading);
+}
+
+.woc-voice-widget .woc-bubble-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.woc-voice-widget .woc-delete-msg-btn {
+    background: none;
+    border: none;
+    color: var(--woc-text-muted);
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.woc-voice-widget .woc-delete-msg-btn:hover {
+    opacity: 1;
+    color: #ff0055;
+    background: rgba(255, 0, 85, 0.15);
+}
+
+.woc-voice-widget .woc-msg-wrap.woc-fade-out {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transform: scale(0.9) translateY(10px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.woc-voice-widget .woc-audio-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.woc-voice-widget .woc-play-pill {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--woc-primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.woc-voice-widget.theme-cyber-noir .woc-play-pill {
+    color: #070709;
+}
+
+.woc-voice-widget .woc-voice-bubble:hover .woc-play-pill {
+    transform: scale(1.08);
+}
+
+/* Waveforms */
+.woc-voice-widget .woc-waveform-box {
+    flex: 1;
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.woc-voice-widget .woc-waveform-bars {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    width: 100%;
+    height: 100%;
+}
+
+.woc-voice-widget .woc-waveform-bar {
+    flex: 1;
+    background-color: var(--woc-text-muted);
+    opacity: 0.35;
+    border-radius: 3px;
+    min-height: 4px;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.woc-voice-widget .woc-waveform-bar.filled {
+    background-color: var(--woc-primary);
+    opacity: 1;
+}
+
+/* Visualizer Overlay */
+.woc-voice-widget .woc-visualizer-wrap {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.2;
+}
+
+.woc-voice-widget .woc-visualizer-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   Controls Bar & Push-to-Talk Mic
+   ========================================================================== */
+.woc-voice-widget .woc-widget-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px 20px;
+    background: var(--woc-card-bg);
+    border-top: 1px solid var(--woc-border);
+    position: relative;
+    z-index: 10;
+}
+
+.woc-voice-widget .woc-controls-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.woc-voice-widget .woc-discard-btn {
+    position: absolute;
+    right: calc(50% + 56px);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 0, 85, 0.15);
+    border: 1.5px solid rgba(255, 0, 85, 0.4);
+    color: #ff0055;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 10px rgba(255, 0, 85, 0.2);
+    animation: woc-pop-in 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 5;
+}
+
+.woc-voice-widget .woc-discard-btn:hover {
+    background: #ff0055;
+    color: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+}
+
+.woc-voice-widget .woc-mic-wrapper {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Circular Timer Ring */
+.woc-voice-widget .woc-timer-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 86px;
+    height: 86px;
+    transform: rotate(-90deg);
+    pointer-events: none;
+}
+
+.woc-voice-widget .woc-timer-ring-bg {
+    fill: none;
+    stroke: var(--woc-ring-bg);
+    stroke-width: 4;
+}
+
+.woc-voice-widget .woc-timer-ring-progress {
+    fill: none;
+    stroke: var(--woc-primary);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 238.76; /* 2 * PI * 38 */
+    stroke-dashoffset: 238.76;
+    transition: stroke-dashoffset 0.1s linear, stroke 0.3s ease;
+}
+
+/* PTT Button */
+.woc-voice-widget .woc-mic-btn {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: var(--woc-card-bg);
+    border: 2px solid var(--woc-border);
+    color: var(--woc-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.woc-voice-widget .woc-mic-btn:hover {
+    border-color: var(--woc-primary);
+    color: var(--woc-primary);
+    transform: scale(1.05);
+}
+
+.woc-voice-widget .woc-mic-btn.connecting {
+    border-color: #f59e0b;
+    color: #f59e0b;
+    animation: woc-pulse 1s infinite alternate;
+}
+
+.woc-voice-widget .woc-mic-btn.recording {
+    background: var(--woc-accent);
+    border-color: var(--woc-accent);
+    color: #ffffff;
+    box-shadow: 0 0 30px var(--woc-accent);
+    animation: woc-mic-recording 1.2s infinite;
+}
+
+.woc-voice-widget .woc-mic-btn.recording + .woc-timer-ring .woc-timer-ring-progress {
+    stroke: var(--woc-accent);
+}
+
+.woc-voice-widget .woc-mic-caption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--woc-text-muted);
+    letter-spacing: 1px;
+}
+
+.woc-voice-widget .woc-mic-timer-label {
+    color: var(--woc-accent);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes woc-pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes woc-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+@keyframes woc-mic-recording {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile Tweaks */
+@media (max-width: 600px) {
+    .woc-voice-widget {
+        border-radius: 0;
+        margin: 0;
+        height: 100vh !important;
+        max-width: 100% !important;
+    }
+}

@@ -1,5 +1,5 @@
-// Connect to Socket.io (Replace with your actual Render app URL once created)
-const socket = io(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '' : 'https://voice-chat-rooms-fwf0.onrender.com');
+// Connect to Socket.io VPS
+const socket = io(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '' : 'https://voice.worldofchat.co.uk');
 const joinOverlay = document.getElementById('join-overlay');
 const joinBtn = document.getElementById('join-btn');
 const app = document.getElementById('app');
@@ -483,10 +483,17 @@ function createVoiceBubble(data, isSent) {
     bubble.dataset.msgId = data.msgId;
     bubble.style.cursor = 'pointer'; // Make it look clickable
 
+    const ts = data && data.timestamp ? (data.timestamp < 10000000000 ? data.timestamp * 1000 : data.timestamp) : Date.now();
+    const d = new Date(ts);
+    const now = new Date();
+    const isToday = d.toDateString() === now.toDateString();
+    const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+    const formattedDate = isToday ? `Today, ${timeStr}` : `${d.toLocaleDateString([], { day: 'numeric', month: 'short' })}, ${timeStr}`;
+
     bubble.innerHTML = `
         <div class="bubble-header">
             <span>${isSent ? 'YOU' : 'VOICE FROM ' + data.userId.substring(0, 6)}</span>
-            <span>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            <span>${formattedDate}</span>
         </div>
         <div class="audio-controls">
             <div class="play-icon">

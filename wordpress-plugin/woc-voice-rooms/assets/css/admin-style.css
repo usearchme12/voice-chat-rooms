@@ -1,0 +1,154 @@
+/* ==========================================================================
+   World of Chat - Voice Rooms (WP Admin Settings Styles)
+   ========================================================================== */
+
+.woc-admin-wrapper {
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+.woc-admin-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccd0d4;
+}
+
+.woc-admin-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 8px 0;
+}
+
+.woc-admin-header .dashicons {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+    color: #0085ba;
+}
+
+.woc-admin-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+@media (max-width: 960px) {
+    .woc-admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.woc-card {
+    background: #ffffff;
+    border: 1px solid #c3c4c7;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    margin-bottom: 25px;
+}
+
+.woc-card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #0f172a;
+}
+
+.woc-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.woc-divider {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 25px 0;
+}
+
+/* Server Test Box */
+.woc-server-test-box {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.woc-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.woc-badge-idle {
+    background-color: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+}
+
+.woc-badge-success {
+    background-color: #dcfce7;
+    color: #15803d;
+    border: 1px solid #86efac;
+}
+
+.woc-badge-warning {
+    background-color: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+
+.woc-badge-error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+}
+
+/* Snippet Box */
+.woc-code-snippet {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 12px 0 16px;
+}
+
+.woc-code-snippet code {
+    background: transparent;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0284c7;
+}
+
+.woc-attributes-list {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.woc-attributes-list li {
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.woc-attributes-list code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
