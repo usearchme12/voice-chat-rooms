@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: World of Chat - Voice Rooms
+ * Plugin Name: World of Chat - Voice Rooms (Free Edition)
  * Plugin URI: https://www.worldofchat.co.uk/
- * Description: Low-latency, push-to-talk anonymous voice chat rooms with dynamic mic warmup, waveform audio bubbles, and multi-theme support.
+ * Description: Low-latency, push-to-talk anonymous voice chat rooms pre-configured with the free cloud signaling server.
  * Version: 1.4.8
  * Author: World of Chat
  * Author URI: https://www.worldofchat.co.uk/
@@ -54,23 +54,23 @@ class WOC_Voice_Rooms_Plugin {
         // Plugin action links
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), array($this, 'add_action_links'));
 
-        // Auto-migrate legacy Render URL to voice.worldofchat.co.uk if stored in DB
+        // Ensure server URL has a default if empty
         $saved = get_option('woc_vr_server_url');
-        if (empty($saved) || strpos($saved, 'onrender.com') !== false) {
-            update_option('woc_vr_server_url', 'https://voice.worldofchat.co.uk');
+        if (empty($saved)) {
+            update_option('woc_vr_server_url', 'https://voice-chat-rooms-fwf0.onrender.com');
         }
     }
 
     public function activate() {
-        // Auto-migrate legacy Render URL to voice.worldofchat.co.uk
+        // Set default server URL if empty
         $saved = get_option('woc_vr_server_url');
-        if (empty($saved) || strpos($saved, 'onrender.com') !== false) {
-            update_option('woc_vr_server_url', 'https://voice.worldofchat.co.uk');
+        if (empty($saved)) {
+            update_option('woc_vr_server_url', 'https://voice-chat-rooms-fwf0.onrender.com');
         }
 
         // Set default options if not existing
         $default_options = array(
-            'server_url'       => 'https://voice.worldofchat.co.uk',
+            'server_url'       => 'https://voice-chat-rooms-fwf0.onrender.com',
             'default_theme'    => 'cyber-noir',
             'max_seconds'      => 30,
             'sound_effects'    => 1,

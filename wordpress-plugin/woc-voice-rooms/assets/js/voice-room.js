@@ -43,7 +43,7 @@
         const instanceId = container.dataset.instanceId || '1';
         const configKey = 'wocVoiceConfig_' + instanceId;
         const config = window[configKey] || {
-            serverUrl: 'https://voice.worldofchat.co.uk',
+            serverUrl: 'https://voice-chat-rooms-fwf0.onrender.com',
             maxSeconds: 30,
             soundEffects: true,
             currentUser: { isLoggedIn: false, displayName: '' }

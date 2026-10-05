@@ -112,8 +112,8 @@ class WOC_Voice_Rooms_Admin {
         );
 
         $saved_server = get_option('woc_vr_server_url');
-        if (empty($saved_server) || strpos($saved_server, 'onrender.com') !== false) {
-            $saved_server = 'https://voice.worldofchat.co.uk';
+        if (empty($saved_server)) {
+            $saved_server = 'https://voice-chat-rooms-fwf0.onrender.com';
             update_option('woc_vr_server_url', $saved_server);
         }
 
@@ -124,8 +124,8 @@ class WOC_Voice_Rooms_Admin {
 
     public function render_settings_page() {
         $server_url = get_option('woc_vr_server_url');
-        if (empty($server_url) || strpos($server_url, 'onrender.com') !== false) {
-            $server_url = 'https://voice.worldofchat.co.uk';
+        if (empty($server_url)) {
+            $server_url = 'https://voice-chat-rooms-fwf0.onrender.com';
             update_option('woc_vr_server_url', $server_url);
         }
         $default_theme    = get_option('woc_vr_default_theme', 'cyber-noir');

@@ -25,8 +25,8 @@ class WOC_Voice_Rooms_Shortcode {
 
         // Fetch saved options from WP
         $opt_server_url = get_option('woc_vr_server_url');
-        if (empty($opt_server_url) || strpos($opt_server_url, 'onrender.com') !== false) {
-            $opt_server_url = 'https://voice.worldofchat.co.uk';
+        if (empty($opt_server_url)) {
+            $opt_server_url = 'https://voice-chat-rooms-fwf0.onrender.com';
             update_option('woc_vr_server_url', $opt_server_url);
         }
         $opt_theme            = get_option('woc_vr_default_theme', 'cyber-noir');
