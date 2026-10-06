@@ -52,10 +52,13 @@ Previously, the Node.js / Socket.io signaling server was hosted on Render (`http
 
 ---
 
-## WordPress Integration (`woc-voice-chat` & `woc-voice-rooms`)
+## WordPress Integration (`world-of-chat-voice-chat`, `woc-voice-chat`, `woc-voice-rooms`)
 
 The repository includes the production WordPress plugin located in `wordpress-plugin/`:
-- **Default Server**: Points to `https://voice.worldofchat.co.uk`.
+- **Default Server**: Points to `https://voice-chat-rooms-fwf0.onrender.com` (or self-hosted VPS in Settings).
+- **Zero External Dependencies / GDPR Compliant**:
+  - `socket.io.min.js` (v4.7.2) bundled locally inside `assets/js/` (no external CDN calls).
+  - Orbitron and Inter typography bundled locally as WOFF2 in `assets/fonts/` (no Google Fonts API calls).
 - **Status Indicator**: Displays real-time online presence as `X ONLINE` (replacing the generic `SIGNAL` label).
 - **Persistent Message Storage**:
   - Automatically records up to 25 historical voice messages on disk and in WordPress options (`woc_vr_recent_history`).
@@ -65,6 +68,9 @@ The repository includes the production WordPress plugin located in `wordpress-pl
   - Automatically falls back to file modification time (`filemtime`) on disk for legacy audio files to avoid inaccurate viewer page-load clocks.
 - **Microphone Hardware Stabilization**:
   - Dynamically waits for mic hardware signal detection before recording chunks, preventing clipped or blank audio files.
+- **Hardened Permissions**:
+  - Voice note deletion is strictly restricted to authenticated administrators (`manage_options`).
+  - CSRF nonces strictly enforced on all AJAX endpoints.
 
 ---
 
