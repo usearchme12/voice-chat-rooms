@@ -2,7 +2,7 @@
 Contributors: usearchme00, worldofchat
 Tags: voice chat, push to talk, audio chat, webrtc, walkie talkie
 Requires at least: 5.8
-Tested up to: 6.7
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.4.8
 License: GPLv2 or later
